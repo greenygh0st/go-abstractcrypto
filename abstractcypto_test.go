@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// basic test of Encrypt and Decrypt
 func TestEncryptDecrypt(t *testing.T) {
 	key := []byte("0123456789abcdef0123456789abcdef")
 
@@ -37,6 +38,26 @@ func TestEncryptDecrypt(t *testing.T) {
 	}
 }
 
+// large data ipsum lorem test of Encrypt and Decrypt
+func TestEncryptDecryptLarge(t *testing.T) {
+	key := []byte("0123456789abcdef0123456789abcdef")
+
+	// Test encryption and decryption of empty string
+	plaintext := "Lorem ipsum dolor sit amet, consectetur adipiscing elitt. Pellentesque nec nisl eget nisl luctus luctus. Nullam auctor, ipsum ut aliquet lobortis, tellus nisl aliquet felis, sit amet ultrices nisl nisl eu nunc. Donec auctor, lorem id tempor faucibus, nisl velit ultricies sapien, eu aliquet velit quam eget arcu. Sed euismod, nisl at tincidunt porta, ipsum quam aliquam elit, sed aliquam nisl ipsum eget sem. Donec nec libero at nisl luctus tincidunt. Sed euismod, nisl at tincidunt porta, ipsum quam aliquam elit, sed aliquam nisl ipsum eget sem. Donec nec libero at nisl luctus tincidunt. Sed euismod, nisl at tincidunt porta, ipsum quam aliquam elit, sed aliquam nisl ipsum eget sem. Donec nec libero at nisl luctus tincidunt. Sed euismod, nisl at tincidunt porta, ipsum quam aliquam elit, sed aliquam nisl ipsum eget sem. Donec nec libero at nisl luctus tincidunt. Sed euismod, nisl at tincidunt porta, ipsum quam aliquam elit, sed aliquam nisl ipsum eget sem."
+	encrypted, err := abstractcypto.Encrypt(key, plaintext)
+	if err != nil {
+		t.Errorf("Encrypt returned error: %v", err)
+	}
+	decrypted, err := abstractcypto.Decrypt(key, encrypted)
+	if err != nil {
+		t.Errorf("Decrypt returned error: %v", err)
+	}
+	if decrypted != plaintext {
+		t.Errorf("Decrypt returned %q, expected %q", decrypted, plaintext)
+	}
+}
+
+// basic test of HashSHA256
 func TestHashSHA256(t *testing.T) {
 	// Test hashing of empty string
 	plaintext := ""
