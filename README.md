@@ -6,6 +6,27 @@ The idea of this simple library is to extract away some of the basics involved i
 import (
 	"github.com/greenygh0st/abstractcrypto"
 )
+
+key := []byte("0123456789abcdef0123456789abcdef")
+plaintext := "hello, world!"
+
+// Encrypt plaintext using AES 256 encryption
+encrypted, err := cryptoutil.Encrypt(key, plaintext)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Println("Encrypted:", encrypted)
+
+// Decrypt encrypted string using AES 256 encryption
+decrypted, err := cryptoutil.Decrypt(key, encrypted)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Println("Decrypted:", decrypted)
+
+// Hash plaintext using SHA2-256 hashing
+hash := cryptoutil.HashSHA256(plaintext)
+fmt.Println("Hash:", hash)
 ```
 
 ## Testing 
